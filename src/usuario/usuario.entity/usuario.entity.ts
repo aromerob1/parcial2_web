@@ -2,18 +2,15 @@ import { AlbumEntity } from '../../album/album.entity/album.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity()
-export class PerformerEntity {
+export class UsuarioEntity {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: number;
 
     @Column()
     nombre: string;
 
     @Column()
-    imagen: string;
-
-    @Column()
-    descripcion: string;
+    telefono: string;
 
     @ManyToMany(() => AlbumEntity, (album) => album.performers)
     @JoinTable()

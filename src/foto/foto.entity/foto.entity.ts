@@ -3,21 +3,23 @@ import { TrackEntity } from '../../track/track.entity/track.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from 'typeorm';
 
 @Entity()
-export class AlbumEntity {
+export class FotoEntity {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: number;
 
     @Column()
-    nombre: string;
+    ISO: number;
 
     @Column()
-    caratula: string;
+    velObturacion: number;
 
     @Column()
-    fechaLanzamiento: Date;
+    apertura: number;
 
     @Column()
-    descripcion: string;
+    fecha: Date;
+
+    
 
     @OneToMany(() => TrackEntity, (track) => track.album)
     tracks: TrackEntity[];

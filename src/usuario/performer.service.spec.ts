@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PerformerService } from './performer.service';
-import { PerformerEntity } from './performer.entity/performer.entity';
+import { PerformerEntity } from './usuario.entity/usuario.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
