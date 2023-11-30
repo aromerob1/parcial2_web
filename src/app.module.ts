@@ -9,6 +9,7 @@ import { TrackEntity } from './track/track.entity/track.entity';
 import { PerformerEntity } from './performer/performer.entity/performer.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PerformerAlbumModule } from './performer-album/performer-album.module';
+import { AlbumModule } from './album/album.module';
 
 @Module({
   imports: [AlbumModule, TrackModule, PerformerModule, 

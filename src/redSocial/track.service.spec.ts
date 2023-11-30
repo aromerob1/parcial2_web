@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TrackService } from './track.service';
-import { TrackEntity } from './track.entity/track.entity';
+import { TrackEntity } from './redSocial.entity/redSocial.entity';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';

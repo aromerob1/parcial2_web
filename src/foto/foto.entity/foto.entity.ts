@@ -1,11 +1,11 @@
-import { PerformerEntity } from '../../performer/performer.entity/performer.entity';
-import { TrackEntity } from '../../track/track.entity/track.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from 'typeorm';
+import { UsuarioEntity } from 'src/usuario/usuario.entity/usuario.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { AlbumEntity } from 'src/album/album.entity/album.entity';
 
 @Entity()
 export class FotoEntity {
     @PrimaryGeneratedColumn('uuid')
-    id: number;
+    id: string;
 
     @Column()
     ISO: number;
@@ -19,11 +19,9 @@ export class FotoEntity {
     @Column()
     fecha: Date;
 
-    
+    @ManyToOne(() => UsuarioEntity, (usuario) => usuario.fotos)
+    usuario: UsuarioEntity;
 
-    @OneToMany(() => TrackEntity, (track) => track.album)
-    tracks: TrackEntity[];
-
-    @ManyToMany(() => PerformerEntity, (performer) => performer.albums)
-    performers: PerformerEntity[];
+    @ManyToOne(() => AlbumEntity, (album) => album.fotos)
+    album: AlbumEntity;
 }

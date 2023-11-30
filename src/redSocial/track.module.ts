@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TrackService } from './track.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TrackEntity } from './track.entity/track.entity';
+import { TrackEntity } from './redSocial.entity/redSocial.entity';
 
 @Module({
   providers: [TrackService],
