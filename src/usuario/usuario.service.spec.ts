@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PerformerService } from './performer.service';
-import { PerformerEntity } from './usuario.entity/usuario.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
+import { UsuarioService } from './usuario.service';
+import { UsuarioEntity } from './usuario.entity/usuario.entity';
 
-describe('PerformerService', () => {
-  let service: PerformerService;
-  let repository: Repository<PerformerEntity>;
+describe('UsuarioService', () => {
+  let service: UsuarioService;
+  let repository: Repository<UsuarioEntity>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [...TypeOrmTestingConfig()],
-      providers: [PerformerService],
+      providers: [UsuarioService],
     }).compile();
 
-    service = module.get<PerformerService>(PerformerService);
-    repository = module.get<Repository<PerformerEntity>>(getRepositoryToken(PerformerEntity));
+    service = module.get<UsuarioService>(UsuarioService);
+    repository = module.get<Repository<UsuarioEntity>>(getRepositoryToken(UsuarioEntity));
   });
 
   it('should be defined', () => {
