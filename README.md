@@ -1,7 +1,5 @@
 ## Andres Felipe Romero Brand - 202013448
-3. nest g s museum serviceeeeee
-1. nest g mo museum moduloooo
-2. nest g cl museum/museum.entity --no-spec entityyy
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
