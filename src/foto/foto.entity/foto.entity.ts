@@ -1,6 +1,6 @@
-import { UsuarioEntity } from 'src/usuario/usuario.entity/usuario.entity';
+import { UsuarioEntity } from '../../usuario/usuario.entity/usuario.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { AlbumEntity } from 'src/album/album.entity/album.entity';
+import { AlbumEntity } from '../../album/album.entity/album.entity';
 
 @Entity()
 export class FotoEntity {

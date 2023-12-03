@@ -1,8 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { UsuarioEntity } from './usuario.entity/usuario.entity';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsuarioService {
@@ -12,11 +12,11 @@ export class UsuarioService {
     ){}
 
     async findAllUsuarios(): Promise<UsuarioEntity[]> {
-        return await this.usuarioRepository.find({ relations: ["redSocial, fotos"] });
+        return await this.usuarioRepository.find();
     }
 
     async findUsuarioById(id: string): Promise<UsuarioEntity> {
-        const usuario: UsuarioEntity = await this.usuarioRepository.findOne({where: {id}, relations: ["redSocial, fotos"] } );
+        const usuario: UsuarioEntity = await this.usuarioRepository.findOne({where: {id} } );
         if (!usuario)
           throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
    
@@ -25,7 +25,7 @@ export class UsuarioService {
 
     async createUsuario(usuario: UsuarioEntity): Promise<UsuarioEntity> {
         if (usuario.telefono.length != 10) {
-            throw new BadRequestException('El telefono debe tener exactamente 10 caracteres');
+            throw new BusinessLogicException('El telefono debe tener exactamente 10 caracteres', BusinessError.BAD_REQUEST);
         }
         return await this.usuarioRepository.save(usuario);
     }

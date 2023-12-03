@@ -1,0 +1,2 @@
+Los casos que se probaron fueron seleccionados dado que son los más importantes, los que más se usarían y los que prueban y utilizan todos los endpoints de la API.
+Debido a esto, con estos casos de prueba se cubre toda la funcionalidad de la API y dan una idea clara de su correcto funcionamiento.

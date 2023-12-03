@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "8364d42b-dbab-4d85-9e24-0d049ba76491",
+		"name": "Red Social",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16942568"
+	},
+	"item": [
+		{
+			"name": "Add a Red Social",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"redSocial_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"MiEspacio\",\r\n    \"slogan\": \"Siempre tendras un espacio donde todos se pueden reunir\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/redSocial",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"redSocial"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a Red Social",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"MiEspacio\",\r\n    \"slogan\": \"Siempre tendras un espacio donde todos se pueden reunir\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/redSocial",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"redSocial"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"nombre\": \"MiEspacio\",\r\n    \"slogan\": \"Siempre tendras un espacio donde todos se pueden reunir\"\r\n}"
+				}
+			]
+		}
+	]
+}

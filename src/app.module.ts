@@ -2,17 +2,18 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AlbumModule } from './album/album.module';
-import { TrackModule } from './track/track.module';
-import { PerformerModule } from './performer/performer.module';
 import { AlbumEntity } from './album/album.entity/album.entity';
-import { TrackEntity } from './track/track.entity/track.entity';
-import { PerformerEntity } from './performer/performer.entity/performer.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PerformerAlbumModule } from './performer-album/performer-album.module';
-import { AlbumModule } from './album/album.module';
+import { FotoEntity } from './foto/foto.entity/foto.entity';
+import { RedSocialEntity } from './redSocial/redSocial.entity/redSocial.entity';
+import { UsuarioEntity } from './usuario/usuario.entity/usuario.entity';
+import { FotoModule } from './foto/foto.module';
+import { RedSocialModule } from './redSocial/redSocial.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { RedSocialController } from './redSocial/redSocial.controller';
 
 @Module({
-  imports: [AlbumModule, TrackModule, PerformerModule, 
+  imports: [AlbumModule, FotoModule, RedSocialModule, UsuarioModule, 
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -20,11 +21,11 @@ import { AlbumModule } from './album/album.module';
       username: 'postgres',
       password: 'postgres',
       database: 'album',
-      entities: [AlbumEntity, TrackEntity, PerformerEntity],
+      entities: [AlbumEntity, FotoEntity, RedSocialEntity, UsuarioEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true
-    }), PerformerAlbumModule,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

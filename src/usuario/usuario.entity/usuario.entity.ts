@@ -1,7 +1,6 @@
-import { FotoEntity } from 'src/foto/foto.entity/foto.entity';
-import { AlbumEntity } from '../../album/album.entity/album.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany, ManyToOne } from 'typeorm';
-import { RedSocialEntity } from 'src/redSocial/redSocial.entity/redSocial.entity';
+import { FotoEntity } from '../../foto/foto.entity/foto.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm';
+import { RedSocialEntity } from '../../redSocial/redSocial.entity/redSocial.entity';
 
 @Entity()
 export class UsuarioEntity {

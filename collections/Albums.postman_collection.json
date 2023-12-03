@@ -1,0 +1,566 @@
+{
+	"info": {
+		"_postman_id": "da48a3a6-d8e7-49fb-aa78-59c830f09931",
+		"name": "Albums",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16942568"
+	},
+	"item": [
+		{
+			"name": "Add an album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"album_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fechaInicio\": \"2023-11-01T12:00:00.00Z\",\r\n    \"fechaFin\": \"2023-12-01T12:00:00.000Z\",\r\n    \"titulo\": \"Mis Fotos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/albums",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fechaInicio\": \"2023-11-01T12:00:00.000Z\",\r\n    \"fechaFin\": \"2023-12-01T12:00:00.000Z\",\r\n    \"titulo\": \"Mis Fotos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/albums",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\n    \"fechaInicio\": \"2023-11-01T12:00:00.000Z\",\n    \"fechaFin\": \"2023-12-01T12:00:00.000Z\",\n    \"titulo\": \"Mis Fotos\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get one album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/{{album_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"{{album_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one album",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums/{{album_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"{{album_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"fechaInicio\": \"2023-11-01T12:00:00.000Z\",\r\n    \"fechaFin\": \"2023-12-01T12:00:00.000Z\",\r\n    \"titulo\": \"Mis Fotos\",\r\n    \"fotos\": [\r\n    {\r\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n        \"ISO\": 1000,\r\n        \"velObturacion\": 100,\r\n        \"apertura\": 10,\r\n        \"fecha\": \"2023-11-01T12:00:00.000Z\"\r\n    }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get an invalid album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The album with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an invalid album",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The album with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete an album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/{{album_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"{{album_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an album",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums/{{album_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"{{album_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an invalid album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The album with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an invalid album",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The album with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Add foto to album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/{{album_id}}/fotos/{{foto_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"{{album_id}}",
+						"fotos",
+						"{{foto_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add foto to album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums/{{album_id}}/fotos/{{foto_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"{{album_id}}",
+								"fotos",
+								"{{foto_id_1}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n    \"fechaInicio\": \"2023-11-01T12:00:00.000Z\",\r\n    \"fechaFin\": \"2023-12-01T12:00:00.000Z\",\r\n    \"titulo\": \"Mis Fotos\",\r\n    \"fotos\": [\r\n    {\r\n        \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\r\n        \"ISO\": 1000,\r\n        \"velObturacion\": 100,\r\n        \"apertura\": 10,\r\n        \"fecha\": \"2023-11-01T12:00:00.000Z\"\r\n    }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Add an invalid foto to an album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The foto with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/{{album_id}}/fotos/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"{{album_id}}",
+						"fotos",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add an invalid foto to an album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/museums/{{museum_id}}/artworks/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"museums",
+								"{{museum_id}}",
+								"artworks",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The foto with the given id was not found\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Add a foto to an invalid album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The album with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/00000000-0000-0000-0000-000000000000/fotos/{{foto_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"00000000-0000-0000-0000-000000000000",
+						"fotos",
+						"{{foto_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a foto to an invalid album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/albums/00000000-0000-0000-0000-000000000000/fotos/{{foto_id_1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"albums",
+								"00000000-0000-0000-0000-000000000000",
+								"fotos",
+								"{{foto_id_1}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The album with the given id was not found\"\r\n}"
+				}
+			]
+		}
+	]
+}
